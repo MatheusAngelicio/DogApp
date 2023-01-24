@@ -1,5 +1,6 @@
 import 'package:dogapp/pages/hello_page2.dart';
 import 'package:dogapp/pages/hello_page3.dart';
+import 'package:dogapp/utils/nav.dart';
 import 'package:flutter/material.dart';
 
 import '../widgetssssss/blue_button.dart';
@@ -52,25 +53,31 @@ class HomePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            BlueButton("ListView",onPressed: () => _onClickNavigator(context, HelloPage1())),
-            BlueButton("Page 2", onPressed:() => _onClickNavigator(context, HelloPage2())),
-            BlueButton("Page 3", onPressed:() => _onClickNavigator(context, HelloPage3())),
+            BlueButton("ListView",),
+            BlueButton("Page 2",),
+            BlueButton("Page 3",),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            BlueButton("Snack",onPressed: _onClickSnack),
-            BlueButton("Dialog",onPressed: _onClickDialog),
-            BlueButton("Toast",onPressed: _onClickToast)
+            BlueButton("Snack",),
+            BlueButton("Dialog",),
+            BlueButton("Toast",)
           ],
         )
       ],
     );
   }
 
-  void _onClickNavigator(BuildContext context, Widget page) {
+  x(text, context){
+   return ElevatedButton(onPressed: () {
+     push(context, HelloPage1());
+   }, child: Text(text));
+  }
 
+  _onClickNavigator(BuildContext context, Widget page) {
+    push(context, page);
   }
 
   _onClickSnack() {

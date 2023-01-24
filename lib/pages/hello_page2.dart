@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../widgetssssss/blue_button.dart';
 
 class HelloPage2 extends StatelessWidget {
+  const HelloPage2({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,11 +16,7 @@ class HelloPage2 extends StatelessWidget {
   }
 
   _body(context) {
-    return Center(
-      child: BlueButton(
-          "Voltar",
-          onPressed: () => _onClickVoltar(context)),
-    );
+    return Center(child: BlueButton("Voltar",));
   }
 
   _onClickVoltar(context) {
