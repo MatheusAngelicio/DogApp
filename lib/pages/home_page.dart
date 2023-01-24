@@ -1,9 +1,9 @@
+import 'package:dogapp/pages/hello_listview.dart';
 import 'package:dogapp/pages/hello_page2.dart';
 import 'package:dogapp/pages/hello_page3.dart';
 import 'package:dogapp/utils/nav.dart';
 import 'package:flutter/material.dart';
 
-import '../widgetssssss/blue_button.dart';
 import 'hello_page1.dart';
 
 class HomePage extends StatelessWidget {
@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            ElevatedButton(onPressed: () { _onClickNavigator(context, HelloPage1());},child: Text("ListView")),
+            ElevatedButton(onPressed: () { _onClickNavigator(context, HelloListView());},child: Text("ListView")),
             ElevatedButton(onPressed: () { _onClickNavigator(context, HelloPage2());},child: Text("Page 2")),
             ElevatedButton(onPressed: () { _onClickNavigator(context, HelloPage3());},child: Text("Page 3")),
           ],
