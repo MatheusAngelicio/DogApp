@@ -53,17 +53,17 @@ class HomePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            BlueButton("ListView",),
-            BlueButton("Page 2",),
-            BlueButton("Page 3",),
+            ElevatedButton(onPressed: () { _onClickNavigator(context, HelloPage1());},child: Text("ListView")),
+            ElevatedButton(onPressed: () { _onClickNavigator(context, HelloPage2());},child: Text("Page 2")),
+            ElevatedButton(onPressed: () { _onClickNavigator(context, HelloPage3());},child: Text("Page 3")),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            BlueButton("Snack",),
-            BlueButton("Dialog",),
-            BlueButton("Toast",)
+            ElevatedButton(onPressed: () {},child: Text("Snack")),
+            ElevatedButton(onPressed: () {},child: Text("Dialog")),
+            ElevatedButton(onPressed: () {},child: Text("Toast")),
           ],
         )
       ],

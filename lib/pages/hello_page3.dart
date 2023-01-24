@@ -16,7 +16,8 @@ class HelloPage3 extends StatelessWidget {
   }
 
   _body(context) {
-    return Center(child: BlueButton("Voltar",));
+    return Center(
+    child: ElevatedButton(onPressed: () {_onClickVoltar(context);},child: Text("Voltar")),);
   }
 
   _onClickVoltar(context) {
