@@ -1,3 +1,4 @@
+import 'package:dogapp/pages/dog_page.dart';
 import 'package:dogapp/utils/nav.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,6 @@ class Dog {
 }
 
 class HelloListView extends StatefulWidget {
-
   @override
   _HelloListViewState createState() => _HelloListViewState();
 }
@@ -23,18 +23,24 @@ class _HelloListViewState extends State<HelloListView> {
       appBar: AppBar(
         title: Text("ListView"),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.list),onPressed: () {
-            print("Lista");
-            setState(() {
-              _gridView = false;
-            });
-          },),
-          IconButton(icon: Icon(Icons.grid_on),onPressed: () {
-            print("Grid");
-            setState(() {
-              _gridView = true;
-            });
-          },)
+          IconButton(
+            icon: Icon(Icons.list),
+            onPressed: () {
+              print("Lista");
+              setState(() {
+                _gridView = false;
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.grid_on),
+            onPressed: () {
+              print("Grid");
+              setState(() {
+                _gridView = true;
+              });
+            },
+          )
         ],
       ),
       body: _body(),
@@ -50,9 +56,10 @@ class _HelloListViewState extends State<HelloListView> {
       Dog("Pastor", "assets/images/dog5.png")
     ];
 
-    if(_gridView) {
+    if (_gridView) {
       return GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemCount: dogs.length,
         itemBuilder: (BuildContext context, int index) {
           return _itemView(dogs, index);
@@ -67,30 +74,35 @@ class _HelloListViewState extends State<HelloListView> {
         },
       );
     }
-
   }
 
-  Stack _itemView(List<Dog> dogs, int index) {
+  _itemView(List<Dog> dogs, int index) {
     Dog dog = dogs[index];
 
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        _img(dog.foto),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Container(
-            margin: EdgeInsets.all(12),
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                color: Colors.black45, borderRadius: BorderRadius.circular(16)),
-            child: Text(
-              dog.nome,
-              style: const TextStyle(fontSize: 26, color: Colors.white),
+    return GestureDetector(
+      onTap: () {
+        push(context, DogPage(dog: dog));
+      },
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          _img(dog.foto),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              margin: EdgeInsets.all(12),
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: Colors.black45,
+                  borderRadius: BorderRadius.circular(16)),
+              child: Text(
+                dog.nome,
+                style: const TextStyle(fontSize: 26, color: Colors.white),
+              ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 
