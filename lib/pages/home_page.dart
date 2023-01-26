@@ -3,6 +3,7 @@ import 'package:dogapp/pages/hello_page2.dart';
 import 'package:dogapp/pages/hello_page3.dart';
 import 'package:dogapp/utils/nav.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'hello_page1.dart';
 
@@ -22,18 +23,14 @@ class HomePage extends StatelessWidget {
       color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          _text(),
-          _pageView(),
-          _buttons(context)
-        ],
+        children: <Widget>[_text(), _pageView(), _buttons()],
       ),
     );
   }
 
   _pageView() {
     return Container(
-      margin: EdgeInsets.only(top:20, bottom: 20),
+      margin: EdgeInsets.only(top: 20, bottom: 20),
       height: 300,
       child: PageView(
         children: <Widget>[
@@ -47,46 +44,108 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  _buttons(context) {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  _buttons() {
+    return Builder(
+      builder: (BuildContext context) {
+        return Column(
           children: <Widget>[
-            ElevatedButton(onPressed: () { _onClickNavigator(context, HelloListView());},child: Text("ListView")),
-            ElevatedButton(onPressed: () { _onClickNavigator(context, HelloPage2());},child: Text("Page 2")),
-            ElevatedButton(onPressed: () { _onClickNavigator(context, HelloPage3());},child: Text("Page 3")),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ElevatedButton(
+                    onPressed: () {
+                      _onClickNavigator(context, HelloListView());
+                    },
+                    child: Text("ListView")),
+                ElevatedButton(
+                    onPressed: () {
+                      _onClickNavigator(context, HelloPage2());
+                    },
+                    child: Text("Page 2")),
+                ElevatedButton(
+                    onPressed: () {
+                      _onClickNavigator(context, HelloPage3());
+                    },
+                    child: Text("Page 3")),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ElevatedButton(
+                    onPressed: () {
+                      _onClickSnack(context);
+                    },
+                    child: Text("Snack")),
+                ElevatedButton(onPressed: () { _onClickDialog(context);}, child: Text("Dialog")),
+                ElevatedButton(onPressed: () { _onClickToast();}, child: Text("Toast")),
+              ],
+            )
           ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            ElevatedButton(onPressed: () {},child: Text("Snack")),
-            ElevatedButton(onPressed: () {},child: Text("Dialog")),
-            ElevatedButton(onPressed: () {},child: Text("Toast")),
-          ],
-        )
-      ],
+        );
+      },
     );
-  }
-
-  x(text, context){
-   return ElevatedButton(onPressed: () {
-     push(context, HelloPage1());
-   }, child: Text(text));
   }
 
   _onClickNavigator(BuildContext context, Widget page) {
     push(context, page);
   }
 
-  _onClickSnack() {
+  _onClickSnack(context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Ola flutter"),
+        action: SnackBarAction(
+          textColor: Colors.yellow,
+          label: "OK",
+          onPressed: () {
+            print("Ok");
+          },
+        ),
+      ),
+    );
   }
 
-  _onClickDialog() {
+  _onClickDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            title: Text("Flutter é muito legal"),
+            actions: <Widget>[
+              TextButton(
+                child: Text("Cancelar"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.pop(context);
+                  print("OK !!!");
+                },
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 
   _onClickToast() {
+    Fluttertoast.showToast(
+        msg: "Flutter é muito legal",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
   }
 
   _img(String img) {
