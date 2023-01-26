@@ -5,24 +5,44 @@ import 'package:dogapp/utils/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'hello_page1.dart';
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Hello Flutter"),
-      ),
-      body: _body(context),
+        appBar: AppBar(
+          title: Text("Hello Flutter"),
+        ),
+        body: _body(context),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                _onClickTab();
+              },
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            FloatingActionButton(
+              child: Icon(Icons.favorite),
+              onPressed: () {
+                _onClickTab();
+              },
+            ),
+          ],
+        ),
+      drawer: Drawer()
     );
   }
 
   _body(context) {
     return Container(
+      padding: const EdgeInsets.only(top: 16),
       color: Colors.white,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[_text(), _pageView(), _buttons()],
       ),
     );
@@ -77,8 +97,16 @@ class HomePage extends StatelessWidget {
                       _onClickSnack(context);
                     },
                     child: Text("Snack")),
-                ElevatedButton(onPressed: () { _onClickDialog(context);}, child: Text("Dialog")),
-                ElevatedButton(onPressed: () { _onClickToast();}, child: Text("Toast")),
+                ElevatedButton(
+                    onPressed: () {
+                      _onClickDialog(context);
+                    },
+                    child: Text("Dialog")),
+                ElevatedButton(
+                    onPressed: () {
+                      _onClickToast();
+                    },
+                    child: Text("Toast")),
               ],
             )
           ],
@@ -144,8 +172,7 @@ class HomePage extends StatelessWidget {
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
-        fontSize: 16.0
-    );
+        fontSize: 16.0);
   }
 
   _img(String img) {
@@ -167,5 +194,9 @@ class HomePage extends StatelessWidget {
           decorationColor: Colors.red,
           decorationStyle: TextDecorationStyle.wavy),
     );
+  }
+
+  _onClickTab() {
+    print("Adicionar");
   }
 }
