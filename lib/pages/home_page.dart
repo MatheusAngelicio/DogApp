@@ -9,32 +9,48 @@ import 'package:fluttertoast/fluttertoast.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Hello Flutter"),
-        ),
-        body: _body(context),
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              child: Icon(Icons.add),
-              onPressed: () {
-                _onClickTab();
-              },
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text("Hello Flutter"),
+            bottom: TabBar(tabs: [
+              Tab(text: "TAB 1",),
+              Tab(text: "TAB 2",),
+              Tab(text: "TAB 3",),
+            ]),
+          ),
+          body: TabBarView(children: [
+            _body(context),
+            Container(
+              color: Colors.green,
             ),
-            const SizedBox(
-              width: 8,
-            ),
-            FloatingActionButton(
-              child: Icon(Icons.favorite),
-              onPressed: () {
-                _onClickTab();
-              },
-            ),
-          ],
-        ),
-      drawer: DrawerList()
+            Container(
+              color: Colors.yellow,
+            )
+          ],),
+          floatingActionButton: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FloatingActionButton(
+                child: Icon(Icons.add),
+                onPressed: () {
+                  _onClickTab();
+                },
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              FloatingActionButton(
+                child: Icon(Icons.favorite),
+                onPressed: () {
+                  _onClickTab();
+                },
+              ),
+            ],
+          ),
+        drawer: DrawerList()
+      ),
     );
   }
 
